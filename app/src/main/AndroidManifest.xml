@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.kadesa">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".DetailKkActivity"></activity>
+        <activity android:name=".DetailSkuActivity" />
+        <activity android:name=".PermohonanSkuActivity" />
+        <activity android:name=".PermohonanKkActivity" />
+        <activity android:name=".HistoryPermohonanSkuActivity" />
+        <activity android:name=".HistoryPermohonanKkActivity" />
+        <activity android:name=".IndahDesakuActivity" />
+        <activity android:name=".VideoActivity" />
+        <activity android:name=".LembagaActivity" />
+        <activity android:name=".VideoDetailActivity" />
+        <activity android:name=".IndahDesakuDatailActivity" />
+        <activity android:name=".DetailArtikelActivity" />
+        <activity android:name=".ProfileLembagaActivity" />
+        <activity android:name=".RegisterSuccesActivity" />
+        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".UbahPasswordActivity" />
+        <activity android:name=".KodeAktivasiActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ProfileDesaActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

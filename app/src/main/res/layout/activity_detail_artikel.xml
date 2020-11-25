@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailArtikelActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Artikel Harian"
+            android:textStyle="bold"
+            android:gravity="start"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="220dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:background="@drawable/artikel"
+                android:padding="4dp"
+                android:maxHeight="220dp"
+                android:src="@drawable/lembaga_eksekutif"
+                android:scaleType="fitXY"/>
+
+            <TextView
+                android:id="@+id/artikel_judul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/judul_artikel"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:background="@drawable/artikel"
+                android:padding="16dp"
+                android:layout_alignParentBottom="true"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi"
+            android:textStyle="bold"
+            android:gravity="start"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/artikel_isi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/isi_artikel"
+            android:gravity="start"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
