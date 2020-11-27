@@ -1,8 +1,12 @@
 package com.example.kadesa;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.kadesa.helper.AppSession;
+import com.example.kadesa.model.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -12,9 +16,24 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
 
+    AppSession appSession;
+
+    public User getUserSession(){
+        return new Gson().fromJson(appSession.getData(AppSession.USER), User.class);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        appSession = new AppSession(this);
+        User user = getUserSession();
+        if (appSession.isLogin()){
+            Log.d("USER TOKEN", user.getToken());
+        }else {
+            Log.d("USER TOKEN", " Belom Login");
+        }
 
         try
         {

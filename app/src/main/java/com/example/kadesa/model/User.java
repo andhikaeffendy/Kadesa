@@ -5,13 +5,18 @@ import com.google.gson.annotations.SerializedName;
 public class User {
 
     private String name;
-    private String Username;
     private String email;
-    @SerializedName("photo_url")
-    private String photo;
-    @SerializedName("user_id")
-    private String id;
+    @SerializedName("id_token")
     private String token;
+    @SerializedName("village_id")
+    private int villageId;
+    private String address;
+    private String gender;
+    @SerializedName("phone_number")
+    private String phoneNumber;
+    private String image;
+    @SerializedName("occupation_id")
+    private String occupationId;
 
     public String getName() {
         return name;
@@ -19,14 +24,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getUsername() {
-        return Username;
-    }
-
-    public void setUsername(String username) {
-        Username = username;
     }
 
     public String getEmail() {
@@ -37,27 +34,59 @@ public class User {
         this.email = email;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getToken() {
         return token;
     }
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int getVillageId() {
+        return villageId;
+    }
+
+    public void setVillageId(int villageId) {
+        this.villageId = villageId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getOccupationId() {
+        return occupationId;
+    }
+
+    public void setOccupationId(String occupationId) {
+        this.occupationId = occupationId;
     }
 }

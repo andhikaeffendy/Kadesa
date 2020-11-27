@@ -28,6 +28,7 @@
             android:layout_height="220dp">
 
             <ImageView
+                android:id="@+id/tv_imgArtikel"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
                 android:background="@drawable/artikel"
@@ -37,7 +38,7 @@
                 android:scaleType="fitXY"/>
 
             <TextView
-                android:id="@+id/artikel_judul"
+                android:id="@+id/tv_artikelJudul"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/judul_artikel"
@@ -64,7 +65,7 @@
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/artikel_isi"
+            android:id="@+id/tv_artikelIsi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/isi_artikel"

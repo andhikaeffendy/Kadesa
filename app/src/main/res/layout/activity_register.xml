@@ -422,7 +422,7 @@
                     android:background="#FFFFFF"
                     android:layout_marginRight="8dp"/>
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/tv_desaRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -506,7 +506,7 @@
                     android:background="#FFFFFF"
                     android:layout_marginRight="8dp"/>
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/tv_pekerjaanReg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

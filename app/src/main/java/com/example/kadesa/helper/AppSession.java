@@ -1,5 +1,6 @@
 package com.example.kadesa.helper;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.example.kadesa.model.User;
@@ -13,6 +14,10 @@ public class AppSession {
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
+
+    public AppSession(Context context) {
+        sharedPreferences = context.getSharedPreferences(SHAREDKEY, Context.MODE_PRIVATE);
+    }
 
     public void clearSession() {
         editor = sharedPreferences.edit();
@@ -52,6 +57,10 @@ public class AppSession {
         editor.putString(TOKEN, token);
         editor.putString(USER, new Gson().toJson(user));
         editor.apply();
+    }
+
+    public boolean isLogin() {
+        return (sharedPreferences.getString(TOKEN, null) != null);
     }
 
 }

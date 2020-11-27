@@ -5,9 +5,11 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Header;
 
 public interface BaseApiService {
 
@@ -29,6 +31,41 @@ public interface BaseApiService {
 
     @GET("sub_districts")
     Call<ResponseBody> getListKecamatan(@Query("district_id") int district_id);
+
+    @GET("villages")
+    Call<ResponseBody> getListDesa(@Query("sub_district_id") int sub_district_id);
+
+    @GET("occupations")
+    Call<ResponseBody> getListPekerjaan();
+
+    @GET("profile")
+    Call<ResponseBody> getProfileUser();
+
+    @GET("articles")
+    Call<ResponseBody> getSliderAfterLogin(@Query("featured") int featured,
+                                           @Header("Authorization") String authorization);
+
+    @GET("articles")
+    Call<ResponseBody> getArtikelAfterLogin(@Query("limit") int limit,
+                                            @Header("Authorization") String authorization);
+
+    @GET("articles")
+    Call<ResponseBody> getListArtikelAfterLogin(@Header("Authorization") String authorization);
+
+    @GET("videos")
+    Call<ResponseBody> getListVideo(@Header("Authorization") String authorization);
+
+    @GET("vacations")
+    Call<ResponseBody> getListVacation(@Header("Authorization") String authorization);
+
+    @GET("institutions")
+    Call<ResponseBody> getListLembagaDesa(@Header("Authorization") String authorization);
+
+    @GET("articles/{id}")
+    Call<ResponseBody> getDetailArtikel(@Header("Authorization") String authorization,
+                                        @Path("id") int id);
+
+
 
 //    @FormUrlEncoded
 //    @POST("register")
@@ -54,7 +91,7 @@ public interface BaseApiService {
                                        @Field("states_id") int state_id,
                                        @Field("districts_id") int districts_id,
                                        @Field("sub_districts_id") int sub_districts_id,
-                                       @Field("village_id") String village_id,
+                                       @Field("village_id") int village_id,
                                        @Field("occupation_id") int occupation_id,
                                        @Field("gender") String gender,
                                        @Field("phone_number") String phone_number);

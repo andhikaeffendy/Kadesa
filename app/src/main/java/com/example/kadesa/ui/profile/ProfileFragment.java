@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.kadesa.R;
+import com.example.kadesa.helper.AppSession;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,21 +21,17 @@ import com.example.kadesa.R;
  */
 public class ProfileFragment extends Fragment {
 
-
+    AppSession appSession;
     private ProfileViewModel profileViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        profileViewModel =
-                ViewModelProviders.of(this).get(ProfileViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_profile, container, false);
-        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
+        appSession = new AppSession(getActivity());
+        profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
 
-            }
-        });
+        View root = inflater.inflate(R.layout.fragment_profile, container, false);
+
         return root;
     }
 }

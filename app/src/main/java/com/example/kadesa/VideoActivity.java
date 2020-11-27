@@ -13,15 +13,34 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.example.kadesa.helper.AppSession;
+import com.example.kadesa.helper.adapter.VideoAdapter;
+import com.example.kadesa.helper.apihelper.BaseApiService;
+import com.example.kadesa.helper.apihelper.UtilsApi;
+import com.example.kadesa.model.User;
+import com.example.kadesa.model.Video;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class VideoActivity extends AppCompatActivity {
 
+    BaseApiService baseApiService = UtilsApi.getApiService();
+    AppSession appSession;
+    User user;
     ListView listView;
-    String[] mNama = {"Doyok", "Kasino S.E", "Indro S.E"};
-    int[] mImg = {R.drawable.lembaga_desa, R.drawable.lembaga_eksekutif, R.drawable.ic_baseline_assignment_24};
-
+    final ArrayList<Video> videoArrayList = new ArrayList<>();
+    VideoAdapter videoAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,48 +48,49 @@ public class VideoActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listview);
 
-        CustomAdapter customAdapter = new CustomAdapter();
-        listView.setAdapter(customAdapter);
+        appSession = new AppSession(getApplicationContext());
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getApplicationContext(), VideoDetailActivity.class);
-                startActivity(intent);
-            }
-        });
+        videoAdapter = new VideoAdapter(this, videoArrayList);
 
-    }
+        if (appSession.isLogin()){
+            baseApiService.getListVideo(appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()){
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.body().string());
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for (int i = 0; i<jsonArray.length(); i++){
+                                videoArrayList.add(new Video(jsonArray.getJSONObject(i).getString("image"),
+                                        jsonArray.getJSONObject(i).getString("name")));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-    private class CustomAdapter extends BaseAdapter{
-        @Override
-        public int getCount() {
-            return mImg.length;
+                        listView.setAdapter(videoAdapter);
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                Intent intent = new Intent(getApplicationContext(), VideoDetailActivity.class);
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        }else {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
 
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.activity_video,null);
-
-            TextView mNamaVideo = view.findViewById(R.id.et_judulVideo);
-            ImageView mImgVideo = view.findViewById(R.id.et_tempVideo);
-
-            mNamaVideo.setText(mNama[position]);
-            mImgVideo.setImageResource(mImg[position]);
-
-
-            return view;
-        }
     }
 
 }

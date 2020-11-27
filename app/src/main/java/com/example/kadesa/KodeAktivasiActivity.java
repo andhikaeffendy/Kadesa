@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,13 +45,13 @@ public class KodeAktivasiActivity extends AppCompatActivity {
             }
         });
 
-        mEmail = getIntent().getStringExtra("email");
 
 
     }
 
     public void AktivationSubmit(){
         String mKodeAktifasi = mAktifasi.getText().toString();
+        mEmail = getIntent().getStringExtra(Intent.EXTRA_EMAIL);
 
         baseApiService.activationCodeSubmit(mEmail,mKodeAktifasi).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -58,8 +59,7 @@ public class KodeAktivasiActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     try {
                         JSONObject object = new JSONObject(response.body().string());
-
-                        if (object.getString("status").equals("succes")){
+                        if (object.getString("status").equals("success")){
                             Intent intent = new Intent(getApplicationContext(), RegisterSuccesActivity.class);
                             startActivity(intent);
                         }

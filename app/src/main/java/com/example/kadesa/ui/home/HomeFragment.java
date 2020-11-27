@@ -30,12 +30,15 @@ import com.example.kadesa.LembagaActivity;
 import com.example.kadesa.ProfileDesaActivity;
 import com.example.kadesa.R;
 import com.example.kadesa.VideoActivity;
+import com.example.kadesa.helper.AppSession;
 import com.example.kadesa.helper.adapter.ArtikelTerbaruAdapter;
 import com.example.kadesa.helper.apihelper.BaseApiService;
 import com.example.kadesa.helper.apihelper.RetrofitClient;
 import com.example.kadesa.helper.apihelper.UtilsApi;
 import com.example.kadesa.model.ArtikelTerbaru;
 import com.example.kadesa.model.Slider;
+import com.example.kadesa.model.User;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,8 +59,10 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private User user;
 
     private List<ArtikelTerbaru> artikelTerbaruList;
+    AppSession appSession;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -70,9 +75,11 @@ public class HomeFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.tv_recycleArtikelHome);
 
         layoutManager = new LinearLayoutManager(getActivity());
+        appSession = new AppSession(getActivity());
 
         recyclerView.setLayoutManager(layoutManager);
         artikelTerbaruList = new ArrayList<>();
+
 
         //artikelTerbaruList.add(new ArtikelTerbaru(R.drawable.ic_video,"Judul","Deskripsiii"));
 
@@ -120,69 +127,137 @@ public class HomeFragment extends Fragment {
 
         BaseApiService baseApiService = UtilsApi.getApiService();
 
-        baseApiService.getSliderBeforeLogin(1).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()){
-                    Log.d("Response : ",response.body().toString());
-                    List<SlideModel> slideModels = new ArrayList<>();
-                    try {
-                        JSONObject jsonObject = new JSONObject(response.body().string());
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
-                        for (int i = 0; i<jsonArray.length(); i++){
+        if (appSession.isLogin()){
+            baseApiService.getSliderAfterLogin(1,appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()){
+                        List<SlideModel> slideModels = new ArrayList<>();
+                        Log.d("Udah Login : ",response.body().toString());
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.body().string());
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for (int i = 0; i<jsonArray.length(); i++){
 //                            Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
-                            slideModels.add(new SlideModel(jsonArray.getJSONObject(i).getString("image"),jsonArray.getJSONObject(i).getString("name")));
+                                slideModels.add(new SlideModel(jsonArray.getJSONObject(i).getString("image"),jsonArray.getJSONObject(i).getString("name")));
+                            }
                         }
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    imageSlider.setImageList(slideModels,true);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-            }
-        });
-
-        baseApiService.getArtikelBeforeLogin(3).enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.isSuccessful()){
-                    Log.d("Artikel : ",response.body().toString());
-                    try {
-                        JSONObject jsonObject = new JSONObject(response.body().string());
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
-
-                        for (int i = 0; i<jsonArray.length(); i++){
-                            //Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
-                            artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getString("image"),
-                                    jsonArray.getJSONObject(i).getString("name"),"Deskripsiii"));
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        imageSlider.setImageList(slideModels,true);
                     }
+                }
 
-                    mAdapter = new ArtikelTerbaruAdapter(getActivity(), artikelTerbaruList);
-
-                    recyclerView.setAdapter(mAdapter);
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                 }
-            }
+            });
+        } else {
+            baseApiService.getSliderBeforeLogin(1).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()){
+                        List<SlideModel> slideModels = new ArrayList<>();
+                        Log.d("Belum Login : ",response.body().toString());
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.body().string());
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for (int i = 0; i<jsonArray.length(); i++){
+//                            Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
+                                slideModels.add(new SlideModel(jsonArray.getJSONObject(i).getString("image"),jsonArray.getJSONObject(i).getString("name")));
+                            }
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        imageSlider.setImageList(slideModels,true);
+                    }
+                }
 
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        }
+
+        if (appSession.isLogin()){
+            baseApiService.getArtikelAfterLogin(3,appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()){
+                        Log.d("Artikel Login : ",response.body().toString());
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.body().string());
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+                            for (int i = 0; i<jsonArray.length(); i++){
+                                //Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
+                                artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getString("image"),
+                                        jsonArray.getJSONObject(i).getString("name"),"Deskripsiii"));
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        mAdapter = new ArtikelTerbaruAdapter(getActivity(), artikelTerbaruList);
+
+                        recyclerView.setAdapter(mAdapter);
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        }else {
+            baseApiService.getArtikelBeforeLogin(3).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()){
+                        Log.d("Artikel Belum : ",response.body().toString());
+                        try {
+                            JSONObject jsonObject = new JSONObject(response.body().string());
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+                            for (int i = 0; i<jsonArray.length(); i++){
+                                //Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
+                                artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getString("image"),
+                                        jsonArray.getJSONObject(i).getString("name"),"Deskripsiii"));
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        mAdapter = new ArtikelTerbaruAdapter(getActivity(), artikelTerbaruList);
+
+                        recyclerView.setAdapter(mAdapter);
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        }
 
         return view;
     }
