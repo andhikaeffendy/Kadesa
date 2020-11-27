@@ -17,13 +17,13 @@
         android:title="Pelayanan" />
 
     <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile" />
-
-    <item
         android:id="@+id/navigation_artikel"
         android:icon="@drawable/ic_baseline_work_24"
         android:title="Artikel" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="Profile" />
 
 </menu>

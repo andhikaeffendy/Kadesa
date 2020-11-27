@@ -2,6 +2,7 @@ package com.example.kadesa.ui.artikel;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,23 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.kadesa.DetailArtikelActivity;
 import com.example.kadesa.R;
+import com.example.kadesa.helper.apihelper.BaseApiService;
+import com.example.kadesa.helper.apihelper.UtilsApi;
+import com.example.kadesa.model.ArtikelTerbaru;
 import com.example.kadesa.ui.artikel.ArtikelViewModel;
+import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ArtikelFragment extends Fragment {
 
@@ -30,24 +45,51 @@ public class ArtikelFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.list_artikel, container,false);
 
-        ArrayList<Artikel> artikels = new ArrayList<>();
-        artikels.add(new Artikel(R.drawable.ic_baseline_image_24, "Desa Kamuflase di bojongsoang"));
-        artikels.add(new Artikel(R.drawable.ic_baseline_image_24, "Desa Kamuflase di bojongsoang"));
-        artikels.add(new Artikel(R.drawable.ic_baseline_image_24, "Desa Kamuflase di bojongsoang"));
-        artikels.add(new Artikel(R.drawable.ic_baseline_image_24, "Desa Kamuflase di bojongsoang"));
-        artikels.add(new Artikel(R.drawable.ic_baseline_image_24, "Desa Kamuflase di bojongsoang"));
+        final ArrayList<Artikel> artikels = new ArrayList<>();
 
-        ListView list = view.findViewById(R.id.list_artikel);
+        final ListView list = view.findViewById(R.id.list_artikel);
 
         final ArtikelAdapter adapter = new ArtikelAdapter(getActivity(), artikels);
-        list.setAdapter(adapter);
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+
+        BaseApiService baseApiService = UtilsApi.getApiService();
+
+        baseApiService.getListArtikel().enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                adapter.getItemAtPosition(position);
-                Intent intent = new Intent(getActivity(), DetailArtikelActivity.class);
-                startActivity(intent);
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()){
+                    Log.d("ListArtikel : ",response.body().toString());
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for (int i = 0; i < jsonArray.length(); i++){
+
+                            artikels.add(new Artikel(jsonArray.getJSONObject(i).getString("image"),
+                                    jsonArray.getJSONObject(i).getString("name")));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    list.setAdapter(adapter);
+                    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                            adapter.getItemAtPosition(position);
+                            Intent intent = new Intent(getActivity(), DetailArtikelActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
             }
         });
 

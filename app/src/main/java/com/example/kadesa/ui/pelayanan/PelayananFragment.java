@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.kadesa.HistoryPermohonanKkActivity;
 import com.example.kadesa.HistoryPermohonanSkuActivity;
+import com.example.kadesa.LoginActivity;
 import com.example.kadesa.R;
 
 public class PelayananFragment extends Fragment {
@@ -43,7 +44,7 @@ public class PelayananFragment extends Fragment {
         btnKtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), HistoryPermohonanKkActivity.class);
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
                 startActivity(intent);
             }
         });

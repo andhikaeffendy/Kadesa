@@ -33,6 +33,7 @@
             android:textSize="12sp"/>
 
         <EditText
+            android:id="@+id/tv_aktifasiKode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp"
@@ -40,7 +41,7 @@
             android:backgroundTint="#FFFFFF"/>
 
         <Button
-            android:id="@+id/btn_register"
+            android:id="@+id/btn_submitKode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxWidth="200dp"

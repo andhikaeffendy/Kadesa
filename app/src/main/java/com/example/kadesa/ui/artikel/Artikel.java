@@ -2,19 +2,18 @@ package com.example.kadesa.ui.artikel;
 
 public class Artikel {
 
-    private int mImgArtikel;
-    private String mNamaArtikel;
+    private String mImgArtikel,mNamaArtikel;
 
-    public Artikel(int mImgArtikel, String mNamaArtikel) {
+    public Artikel(String mImgArtikel, String mNamaArtikel) {
         this.mImgArtikel = mImgArtikel;
         this.mNamaArtikel = mNamaArtikel;
     }
 
-    public int getmImgArtikel() {
+    public String getmImgArtikel() {
         return mImgArtikel;
     }
 
-    public void setmImgArtikel(int mImgArtikel) {
+    public void setmImgArtikel(String mImgArtikel) {
         this.mImgArtikel = mImgArtikel;
     }
 

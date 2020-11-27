@@ -3,17 +3,26 @@ package com.example.kadesa.ui.home;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.transition.Slide;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
+import com.android.volley.RequestQueue;
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.kadesa.IndahDesakuActivity;
@@ -21,36 +30,58 @@ import com.example.kadesa.LembagaActivity;
 import com.example.kadesa.ProfileDesaActivity;
 import com.example.kadesa.R;
 import com.example.kadesa.VideoActivity;
+import com.example.kadesa.helper.adapter.ArtikelTerbaruAdapter;
+import com.example.kadesa.helper.apihelper.BaseApiService;
+import com.example.kadesa.helper.apihelper.RetrofitClient;
+import com.example.kadesa.helper.apihelper.UtilsApi;
+import com.example.kadesa.model.ArtikelTerbaru;
+import com.example.kadesa.model.Slider;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    private List<ArtikelTerbaru> artikelTerbaruList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
+        final View view = inflater.inflate(R.layout.fragment_home, container,false);
 
-            }
-        });
-        ImageSlider imageSlider = root.findViewById(R.id.slider);
+        final ImageSlider imageSlider = view.findViewById(R.id.slider);
         List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel("https://wallpaperaccess.com/full/1289981.jpg","Berita 1"));
-        slideModels.add(new SlideModel("https://images.unsplash.com/photo-1500964757637-c85e8a162699?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max","Berita 2"));
-        slideModels.add(new SlideModel("https://wallpaperaccess.com/full/16082.jpg","Berita 3"));
         imageSlider.setImageList(slideModels,true);
 
-        Button btnProfileDesa = (Button) root.findViewById(R.id.btn_profileDesa);
-        Button btnAmbulance = (Button) root.findViewById(R.id.btn_ambulance);
-        Button btnIndahDesaku = (Button) root.findViewById(R.id.btn_indahDesaku);
-        Button btnVideo = (Button) root.findViewById(R.id.btn_video);
+        recyclerView = (RecyclerView) view.findViewById(R.id.tv_recycleArtikelHome);
+
+        layoutManager = new LinearLayoutManager(getActivity());
+
+        recyclerView.setLayoutManager(layoutManager);
+        artikelTerbaruList = new ArrayList<>();
+
+        //artikelTerbaruList.add(new ArtikelTerbaru(R.drawable.ic_video,"Judul","Deskripsiii"));
+
+
+
+        Button btnProfileDesa = (Button) view.findViewById(R.id.btn_profileDesa);
+        Button btnAmbulance = (Button) view.findViewById(R.id.btn_ambulance);
+        Button btnIndahDesaku = (Button) view.findViewById(R.id.btn_indahDesaku);
+        Button btnVideo = (Button) view.findViewById(R.id.btn_video);
 
 
          btnProfileDesa.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +118,72 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        BaseApiService baseApiService = UtilsApi.getApiService();
 
-        return root;
+        baseApiService.getSliderBeforeLogin(1).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()){
+                    Log.d("Response : ",response.body().toString());
+                    List<SlideModel> slideModels = new ArrayList<>();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for (int i = 0; i<jsonArray.length(); i++){
+//                            Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
+                            slideModels.add(new SlideModel(jsonArray.getJSONObject(i).getString("image"),jsonArray.getJSONObject(i).getString("name")));
+                        }
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    imageSlider.setImageList(slideModels,true);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+        baseApiService.getArtikelBeforeLogin(3).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()){
+                    Log.d("Artikel : ",response.body().toString());
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+                        for (int i = 0; i<jsonArray.length(); i++){
+                            //Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
+                            artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getString("image"),
+                                    jsonArray.getJSONObject(i).getString("name"),"Deskripsiii"));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    mAdapter = new ArtikelTerbaruAdapter(getActivity(), artikelTerbaruList);
+
+                    recyclerView.setAdapter(mAdapter);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
+
+        return view;
     }
 }
