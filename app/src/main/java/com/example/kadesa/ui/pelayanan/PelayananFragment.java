@@ -44,7 +44,7 @@ public class PelayananFragment extends Fragment {
         btnKtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                Intent intent = new Intent(getActivity(), HistoryPermohonanSkuActivity.class);
                 startActivity(intent);
             }
         });

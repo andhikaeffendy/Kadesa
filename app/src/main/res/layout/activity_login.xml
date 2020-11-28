@@ -15,6 +15,16 @@
         android:padding="16dp"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_kadesa"
+            android:maxWidth="200dp"
+            android:adjustViewBounds="true"
+            android:maxHeight="200dp"
+            android:scaleType="fitXY"
+            android:layout_marginBottom="16dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,18 +32,8 @@
             android:textColor="#FFFFFF"
             android:layout_marginTop="16dp"
             android:textStyle="bold"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="32dp"
             android:textSize="24sp"/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/kadesa_logo"
-            android:maxWidth="100dp"
-            android:adjustViewBounds="true"
-            android:maxHeight="100dp"
-            android:scaleType="fitXY"
-            android:layout_marginBottom="32dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 android:id="@+id/tv_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
+                android:hint="Email"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
@@ -103,6 +103,7 @@
                 android:id="@+id/tv_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 android:hint="Password"
                 android:textSize="12sp"
                 android:textColor="#FFFFFF"
