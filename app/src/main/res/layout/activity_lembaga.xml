@@ -3,38 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="3"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".LembagaActivity">
 
     <ImageView
-        android:id="@+id/et_imgLembaga"
-        android:layout_width="100dp"
-        android:layout_height="80dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_map"/>
-    <LinearLayout
+        android:id="@+id/tv_imgLembagaDesa"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="12dp"
+        android:layout_height="200dp"
+        android:src="@drawable/lembaga_desa"
+        android:scaleType="fitCenter"/>
+    <TextView
+        android:id="@+id/tv_namaLembagaDesa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/et_namaLembaga"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nama Artikel"
-            android:layout_marginBottom="8dp"
-            android:textSize="16sp"
-            android:textColor="#000000"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/et_jabatanLembaga"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Isi artikel ini tentang informasi seputar desa-desa yang bersangkutan"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+        android:text="Saipul Wisnu S.e"
+        android:textAllCaps="true"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginTop="12dp"/>
+    <TextView
+        android:id="@+id/tv_deskripsiLembagaDesa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Kepala Desa Darmayana"
+        android:textSize="12sp"
+        android:textColor="#000000"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary"/>
+
+    <ListView
+        android:id="@+id/et_listAnggotaLembaga"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>

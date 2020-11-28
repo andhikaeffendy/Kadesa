@@ -62,7 +62,7 @@ public class IndahDesakuActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response.body().string());
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
                             for (int i = 0; i<jsonArray.length(); i++){
-                                indahDesakuArrayList.add(new IndahDesaku(jsonArray.getJSONObject(i).getString("image"),
+                                indahDesakuArrayList.add(new IndahDesaku(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("image"),
                                         jsonArray.getJSONObject(i).getString("name")));
                             }
                         } catch (JSONException e) {
@@ -76,7 +76,7 @@ public class IndahDesakuActivity extends AppCompatActivity {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Intent intent = new Intent(getApplicationContext(), IndahDesakuDatailActivity.class);
-                                intent.putExtra("id", position);
+                                intent.putExtra("desaku_id", indahDesakuArrayList.get(position).getId());
                                 startActivity(intent);
                             }
                         });

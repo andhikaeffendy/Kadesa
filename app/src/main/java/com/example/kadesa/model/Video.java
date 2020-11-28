@@ -2,11 +2,21 @@ package com.example.kadesa.model;
 
 public class Video {
 
+    int id;
     String mImgVideo, mJudulVideo;
 
-    public Video(String mImgVideo, String mJudulVideo) {
+    public Video(int id, String mImgVideo, String mJudulVideo) {
+        this.id = id;
         this.mImgVideo = mImgVideo;
         this.mJudulVideo = mJudulVideo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getmImgVideo() {

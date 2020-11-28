@@ -42,6 +42,7 @@ public class ArtikelFragment extends Fragment {
 
     AppSession appSession;
     User user;
+    Artikel artikel;
 
     private ArtikelViewModel artikelViewModel;
 
@@ -58,12 +59,10 @@ public class ArtikelFragment extends Fragment {
 
         final ArtikelAdapter adapter = new ArtikelAdapter(getActivity(), artikels);
 
-
-
-
         BaseApiService baseApiService = UtilsApi.getApiService();
 
         if (appSession.isLogin()){
+            Log.d("DEBUG", "TOKEN " + AppSession.TOKEN);
             baseApiService.getListArtikelAfterLogin(appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -74,7 +73,7 @@ public class ArtikelFragment extends Fragment {
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
                             for (int i = 0; i < jsonArray.length(); i++){
                                 artikels.add(new Artikel(jsonArray.getJSONObject(i).getString("image"),
-                                        jsonArray.getJSONObject(i).getString("name")));
+                                        jsonArray.getJSONObject(i).getString("name"),jsonArray.getJSONObject(i).getInt("id")));
                             }
 
                         } catch (JSONException e) {
@@ -87,8 +86,9 @@ public class ArtikelFragment extends Fragment {
                             @Override
                             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                                 adapter.getItemAtPosition(position);
+                                Log.d("ID ", "ARTIKEL " + artikels.get(position).getId() + " Name : " +artikels.get(position).getmNamaArtikel() );
                                 Intent intent = new Intent(getActivity(), DetailArtikelActivity.class);
-                                intent.putExtra("id", position);
+                                intent.putExtra(Intent.EXTRA_EMAIL, artikels.get(position).getId());
                                 startActivity(intent);
                             }
                         });
@@ -112,7 +112,7 @@ public class ArtikelFragment extends Fragment {
                             for (int i = 0; i < jsonArray.length(); i++){
 
                                 artikels.add(new Artikel(jsonArray.getJSONObject(i).getString("image"),
-                                        jsonArray.getJSONObject(i).getString("name")));
+                                        jsonArray.getJSONObject(i).getString("name"),jsonArray.getJSONObject(i).getInt("id")));
                             }
 
                         } catch (JSONException e) {
@@ -126,6 +126,7 @@ public class ArtikelFragment extends Fragment {
                             public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                                 adapter.getItemAtPosition(position);
                                 Intent intent = new Intent(getActivity(), DetailArtikelActivity.class);
+                                intent.putExtra("artikel_id", id);
                                 startActivity(intent);
                             }
                         });

@@ -2,11 +2,21 @@ package com.example.kadesa.model;
 
 public class IndahDesaku {
 
+    int id;
     String mImg, mJudul;
 
-    public IndahDesaku(String mImg, String mJudul) {
+    public IndahDesaku(int id, String mImg, String mJudul) {
+        this.id = id;
         this.mImg = mImg;
         this.mJudul = mJudul;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getmImg() {

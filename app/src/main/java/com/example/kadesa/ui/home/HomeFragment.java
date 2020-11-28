@@ -201,7 +201,7 @@ public class HomeFragment extends Fragment {
 
                             for (int i = 0; i<jsonArray.length(); i++){
                                 //Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
-                                artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getString("image"),
+                                artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("image"),
                                         jsonArray.getJSONObject(i).getString("name"),"Deskripsiii"));
                             }
 
@@ -212,9 +212,7 @@ public class HomeFragment extends Fragment {
                         }
 
                         mAdapter = new ArtikelTerbaruAdapter(getActivity(), artikelTerbaruList);
-
                         recyclerView.setAdapter(mAdapter);
-
                     }
                 }
 
@@ -235,7 +233,7 @@ public class HomeFragment extends Fragment {
 
                             for (int i = 0; i<jsonArray.length(); i++){
                                 //Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
-                                artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getString("image"),
+                                artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("image"),
                                         jsonArray.getJSONObject(i).getString("name"),"Deskripsiii"));
                             }
 

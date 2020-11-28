@@ -3,10 +3,12 @@ package com.example.kadesa.ui.artikel;
 public class Artikel {
 
     private String mImgArtikel,mNamaArtikel;
+    private int id;
 
-    public Artikel(String mImgArtikel, String mNamaArtikel) {
+    public Artikel(String mImgArtikel, String mNamaArtikel, int id) {
         this.mImgArtikel = mImgArtikel;
         this.mNamaArtikel = mNamaArtikel;
+        this.id = id;
     }
 
     public String getmImgArtikel() {
@@ -23,5 +25,13 @@ public class Artikel {
 
     public void setmNamaArtikel(String mNamaArtikel) {
         this.mNamaArtikel = mNamaArtikel;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

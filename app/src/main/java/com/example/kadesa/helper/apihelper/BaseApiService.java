@@ -62,8 +62,20 @@ public interface BaseApiService {
     Call<ResponseBody> getListLembagaDesa(@Header("Authorization") String authorization);
 
     @GET("articles/{id}")
-    Call<ResponseBody> getDetailArtikel(@Header("Authorization") String authorization,
-                                        @Path("id") int id);
+    Call<ResponseBody> getDetailArtikel(@Path("id") int id,
+                                        @Query("auth_token") String authorization);
+
+    @GET("videos/{id}")
+    Call<ResponseBody> getDetailVideo(@Path("id") int id,
+                                      @Query("auth_token") String authorization);
+
+    @GET("vacations/{id}")
+    Call<ResponseBody> getDetailDesaku(@Path("id") int id,
+                                       @Header("Authorization") String authorization);
+
+    @GET("institutions")
+    Call<ResponseBody> getDataPemerintahan(@Header("Authorization") String authorization);
+
 
 
 

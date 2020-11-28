@@ -61,7 +61,7 @@ public class VideoActivity extends AppCompatActivity {
                             JSONObject jsonObject = new JSONObject(response.body().string());
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
                             for (int i = 0; i<jsonArray.length(); i++){
-                                videoArrayList.add(new Video(jsonArray.getJSONObject(i).getString("image"),
+                                videoArrayList.add(new Video(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("image"),
                                         jsonArray.getJSONObject(i).getString("name")));
                             }
                         } catch (JSONException e) {
@@ -75,7 +75,9 @@ public class VideoActivity extends AppCompatActivity {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 Intent intent = new Intent(getApplicationContext(), VideoDetailActivity.class);
+                                intent.putExtra("video_id", videoArrayList.get(position).getId());
                                 startActivity(intent);
+                                finish();
                             }
                         });
                     }

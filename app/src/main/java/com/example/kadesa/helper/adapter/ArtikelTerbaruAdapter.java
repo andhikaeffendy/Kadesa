@@ -1,6 +1,7 @@
 package com.example.kadesa.helper.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
+import com.example.kadesa.DetailArtikelActivity;
 import com.example.kadesa.R;
 import com.example.kadesa.helper.apihelper.UtilsApi;
 import com.example.kadesa.model.ArtikelTerbaru;
@@ -71,8 +73,16 @@ public class ArtikelTerbaruAdapter extends RecyclerView.Adapter<ArtikelTerbaruAd
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ArtikelTerbaru mArtikel = (ArtikelTerbaru) v.getTag();
-                    Toast.makeText(v.getContext(), mArtikel.getmJudulArtikel() + " Is " + mArtikel.getmDeskripsiArtikelTerbaru(), Toast.LENGTH_SHORT).show();
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            ArtikelTerbaru mArtikel = (ArtikelTerbaru) v.getTag();
+                            Intent intent = new Intent(context, DetailArtikelActivity.class);
+                            intent.putExtra(Intent.EXTRA_EMAIL, mArtikel.getId());
+                            context.startActivity(intent);
+                            Toast.makeText(v.getContext(), mArtikel.getmJudulArtikel() + " Is " + mArtikel.getmDeskripsiArtikelTerbaru(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             });
 

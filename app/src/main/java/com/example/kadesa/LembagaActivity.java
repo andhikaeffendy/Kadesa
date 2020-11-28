@@ -13,15 +13,18 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.example.kadesa.helper.AppSession;
+import com.example.kadesa.helper.apihelper.BaseApiService;
+import com.example.kadesa.helper.apihelper.UtilsApi;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LembagaActivity extends AppCompatActivity {
 
     ListView listView;
-    String[] mNama = {"Doyok", "Kasino S.E", "Indro S.E"};
-    String[] mDesc = {"Warkop Reborn", "Warkop Reborn", "Warkop Reborn"};
-    int[] mImg = {R.drawable.lembaga_desa, R.drawable.lembaga_eksekutif, R.drawable.ic_baseline_assignment_24};
+    AppSession appSession;
+    BaseApiService baseApiService = UtilsApi.getApiService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +33,7 @@ public class LembagaActivity extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.listview);
 
-        CustomAdapter customAdapter = new CustomAdapter();
-        listView.setAdapter(customAdapter);
+        appSession = new AppSession(this);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -41,38 +43,6 @@ public class LembagaActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private class CustomAdapter extends BaseAdapter {
-        @Override
-        public int getCount() {
-            return mImg.length;
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = getLayoutInflater().inflate(R.layout.activity_lembaga,null);
-
-            TextView mNamaLembaga = view.findViewById(R.id.et_namaLembaga);
-            TextView mJabatan = view.findViewById(R.id.et_jabatanLembaga);
-            ImageView mImgLembaga = view.findViewById(R.id.et_imgLembaga);
-
-            mNamaLembaga.setText(mNama[position]);
-            mImgLembaga.setImageResource(mImg[position]);
-
-
-            return view;
-        }
     }
 
 }

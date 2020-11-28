@@ -24,6 +24,7 @@
             android:textSize="24sp"/>
 
         <ImageView
+            android:id="@+id/imgDetailVideo"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:maxHeight="220dp"
@@ -45,6 +46,7 @@
             android:textColor="@android:color/white"/>
 
         <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Deskripsi"
@@ -57,7 +59,7 @@
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/video_deskripsi"
+            android:id="@+id/videoDetailDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/isi_artikel"

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class DetailArtikelActivity extends AppCompatActivity {
     User user;
     BaseApiService baseApiService = UtilsApi.getApiService();
     Picasso picasso;
+    int id;
 
     private ImageView imgArtikel;
     private TextView judulArtikel, descArtikel;
@@ -49,17 +51,21 @@ public class DetailArtikelActivity extends AppCompatActivity {
         appSession = new AppSession(this);
         picasso = Picasso.get();
 
+        id = getIntent().getIntExtra(Intent.EXTRA_EMAIL, 0);
 
+        Log.d("DEBUG", "ID ARTIKEL : " + appSession.getData(AppSession.TOKEN));
 
-        baseApiService.getDetailArtikel(appSession.getData(AppSession.TOKEN), 3).enqueue(new Callback<ResponseBody>() {
+        baseApiService.getDetailArtikel(id, appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()){
                     try {
                         JSONObject jsonObject = new JSONObject(response.body().string());
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
-                        Log.d("Succes" , response.body().toString());
-
+                        JSONObject objectData = new JSONObject(jsonObject.getString("data"));
+                        Log.d("Succes" , jsonObject.getJSONObject("data").getString("name"));
+                        judulArtikel.setText(objectData.getString("name"));
+                        descArtikel.setText(objectData.getString("description"));
+                        picasso.load(objectData.getString("image")).into(imgArtikel);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
