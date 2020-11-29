@@ -80,7 +80,7 @@ public class ArtikelTerbaruAdapter extends RecyclerView.Adapter<ArtikelTerbaruAd
                             Intent intent = new Intent(context, DetailArtikelActivity.class);
                             intent.putExtra(Intent.EXTRA_EMAIL, mArtikel.getId());
                             context.startActivity(intent);
-                            Toast.makeText(v.getContext(), mArtikel.getmJudulArtikel() + " Is " + mArtikel.getmDeskripsiArtikelTerbaru(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(v.getContext(), mArtikel.getmJudulArtikel() + " Is " + mArtikel.getmDeskripsiArtikelTerbaru(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

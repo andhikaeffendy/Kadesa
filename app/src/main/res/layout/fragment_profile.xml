@@ -37,6 +37,7 @@
                 android:text="Nama" />
 
             <TextView
+                android:id="@+id/profileName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -53,6 +54,7 @@
                 android:text="Email" />
 
             <TextView
+                android:id="@+id/emailProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -69,6 +71,7 @@
                 android:text="Password" />
 
             <TextView
+                android:id="@+id/passwordProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -85,6 +88,7 @@
                 android:text="Jenis Kelamin" />
 
             <TextView
+                android:id="@+id/jenisKelaminProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -101,6 +105,7 @@
                 android:text="Alamat" />
 
             <TextView
+                android:id="@+id/addressProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -117,6 +122,7 @@
                 android:text="Provinsi" />
 
             <TextView
+                android:id="@+id/provinsiProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -133,6 +139,7 @@
                 android:text="Kota/Kabupaten" />
 
             <TextView
+                android:id="@+id/kabupatenProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -149,6 +156,7 @@
                 android:text="Kecamatan" />
 
             <TextView
+                android:id="@+id/kecamatanProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -165,6 +173,7 @@
                 android:text="Desa" />
 
             <TextView
+                android:id="@+id/desaProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -181,6 +190,7 @@
                 android:text="No. Telp" />
 
             <TextView
+                android:id="@+id/phoneProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
@@ -197,6 +207,7 @@
                 android:text="Pekerjaan" />
 
             <TextView
+                android:id="@+id/pekerjaanProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"

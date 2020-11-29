@@ -56,7 +56,7 @@ public class PemerintahFragment extends Fragment {
 
         appSession = new AppSession(getActivity());
 
-        baseApiService.getDataPemerintahan(appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
+        baseApiService.getListLembagaDesa(appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()){
@@ -66,7 +66,7 @@ public class PemerintahFragment extends Fragment {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
 
                         for (int i = 0; i<jsonArray.length(); i++){
-                            pemerintahs.add(new Pemerintah(jsonArray.getJSONObject(i).getString("name")));
+                            pemerintahs.add(new Pemerintah(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("name")));
                         }
 
                     } catch (JSONException e) {
@@ -81,6 +81,7 @@ public class PemerintahFragment extends Fragment {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             parent.getItemAtPosition(position);
                             Intent intent = new Intent(getActivity(), LembagaActivity.class);
+                            intent.putExtra("lembaga_id", pemerintahs.get(position).getId());
                             startActivity(intent);
                         }
                     });

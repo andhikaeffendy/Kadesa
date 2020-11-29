@@ -17,58 +17,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="3"
-                android:layout_marginBottom="16dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_weight="2.2"
-                    android:src="@drawable/ic_pengurus"
-                    android:maxWidth="250dp"
-                    android:maxHeight="100dp"
-                    android:scaleType="fitXY"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.8"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Desa Darmayana"
-                        android:textStyle="bold"
-                        android:textColor="#000000"
-                        android:textSize="16sp"
-                        android:layout_marginBottom="8dp"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Kecamatan Ternate Kabupaten Grobogan Kota Solo rt 5 rw 001"
-                        android:textSize="12sp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:src="@drawable/lembaga_desa"
-                android:scaleType="fitCenter"/>
+                android:scaleType="fitCenter"
+                android:layout_marginTop="16dp"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Saipul Wisnu S.e"
+                android:text="Andhika S.e"
                 android:textAllCaps="true"
                 android:textSize="14sp"
                 android:textColor="#000000"

@@ -28,7 +28,7 @@ public class PemerintahAdapter extends ArrayAdapter<Pemerintah> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         if (convertView == null){
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_pemerintah,parent,false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_layout_pemerintah, parent, false);
         }
 
         Pemerintah current = getItem(position);

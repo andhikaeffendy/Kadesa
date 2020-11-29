@@ -24,11 +24,13 @@
             android:textStyle="bold"/>
 
         <ImageView
+            android:id="@+id/imgLembaga"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/lembaga_eksekutif"
             android:scaleType="fitCenter"/>
         <TextView
+            android:id="@+id/et_tvNamaLembaga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -39,6 +41,7 @@
             android:textStyle="bold"
             android:layout_marginTop="12dp"/>
         <TextView
+            android:id="@+id/desc_detailLembaga"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

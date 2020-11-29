@@ -202,7 +202,7 @@ public class HomeFragment extends Fragment {
                             for (int i = 0; i<jsonArray.length(); i++){
                                 //Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
                                 artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("image"),
-                                        jsonArray.getJSONObject(i).getString("name"),"Deskripsiii"));
+                                        jsonArray.getJSONObject(i).getString("name"),null));
                             }
 
                         } catch (JSONException e) {
