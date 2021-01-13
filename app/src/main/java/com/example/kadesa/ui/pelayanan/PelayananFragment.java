@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.kadesa.FormPermohonanSkuActivity;
 import com.example.kadesa.HistoryPermohonanKkActivity;
 import com.example.kadesa.HistoryPermohonanSkuActivity;
 import com.example.kadesa.LoginActivity;
@@ -52,7 +53,7 @@ public class PelayananFragment extends Fragment {
         btnSKU.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), HistoryPermohonanSkuActivity.class);
+                Intent intent = new Intent(getActivity(), FormPermohonanSkuActivity.class);
                 startActivity(intent);
             }
         });

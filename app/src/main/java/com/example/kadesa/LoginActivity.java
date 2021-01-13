@@ -90,6 +90,9 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
+                        }else{
+                            View parentLayout = findViewById(android.R.id.content);
+                            Snackbar.make(parentLayout, response.message(), Snackbar.LENGTH_LONG);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();

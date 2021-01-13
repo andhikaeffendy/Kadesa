@@ -1,5 +1,6 @@
 package com.example.kadesa.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,8 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.kadesa.LoginActivity;
 import com.example.kadesa.R;
 import com.example.kadesa.helper.AppSession;
 import com.example.kadesa.model.User;
@@ -28,7 +31,7 @@ public class ProfileFragment extends Fragment {
     private AppSession appSession;
     private User user;
     private TextView tvName, tvEmail, tvProvinsi, tvKabupaten, tvKecamatan, tvPhone, tvPekerjaan, tvDesa, tvAddress, tvJenisKelamin, tvPassword;
-
+    private Button btnGoToLogin;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +51,6 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (appSession.isLogin()) {
-
             tvName = (TextView) view.findViewById(R.id.profileName);
             tvEmail = (TextView) view.findViewById(R.id.emailProfile);
             tvProvinsi = (TextView) view.findViewById(R.id.provinsiProfile);
@@ -63,6 +65,16 @@ public class ProfileFragment extends Fragment {
 
             user = getUserSession();
             initData();
+        }else{
+            btnGoToLogin = (Button) view.findViewById(R.id.btn_goToLogin);
+            btnGoToLogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+            });
+
         }
     }
 

@@ -1,62 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     tools:context=".PermohonanSkuActivity">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_nomorSurat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:text="Nomor Surat : 503/ .. / XI/Desa/2020"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Permohonan SKU"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                android:layout_marginBottom="16dp"
-                android:textSize="24sp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nomor KK/KTP"
-            android:textSize="14sp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nama"
-            android:textSize="14sp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Golongan Darah"
-            android:textSize="14sp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tinggi Badan"
-            android:textSize="14sp"/>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btn_signIn"
+    <TextView
+        android:id="@+id/tv_namaPerusahaan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxWidth="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Submit"
-        android:background="@drawable/my_button2"
-        android:textColor="#FFFFFF"/>
+        android:textSize="14sp"
+        android:text="Toko Mas Barokah"/>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tv_bidangUsaha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="Jual Beli Perhiasan"
+        android:layout_marginBottom="16dp"/>
+
+</LinearLayout>

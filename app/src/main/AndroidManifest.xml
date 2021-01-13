@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailKkActivity"></activity>
+        <activity android:name=".FormPermohonanSkuActivity"></activity>
+        <activity android:name=".DetailKkActivity" />
         <activity android:name=".DetailSkuActivity" />
         <activity android:name=".PermohonanSkuActivity" />
         <activity android:name=".PermohonanKkActivity" />

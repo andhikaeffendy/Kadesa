@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Detail SKU"
+            android:text="Detail Permohonan SKU"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:layout_marginBottom="16dp"
@@ -24,43 +24,119 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nomor KK : 13244234234234"
-            android:layout_marginBottom="8dp"
-            android:textSize="12sp"/>
+            android:text="Surat Keterangan Usaha"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textAlignment="center"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nama : Andhika Effendy"
-            android:layout_marginBottom="8dp"
-            android:textSize="12sp"/>
+            android:text="@string/nomor_surat"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:layout_marginBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Golongan Darah : O"
-            android:layout_marginBottom="8dp"
-            android:textSize="12sp"/>
+            android:text="@string/ket_kepala_desa"
+            android:textSize="12sp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:id="@+id/tv_namaSku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Nama : NIZAM RULISTA Al-Ghifari"/>
+
+        <TextView
+            android:id="@+id/tv_ttlSku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Tempat, Tanggal lahir : Bandung, 06-03-1992"/>
+
+        <TextView
+            android:id="@+id/tv_jKSku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Jenis Kelamin : Laki-laki"/>
+
+        <TextView
+            android:id="@+id/tv_statusPerkawinanSku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Status Perkawinan : Belum Kawin"/>
+
+        <TextView
+            android:id="@+id/tv_pekerjaanSku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Pekerjaan : Karyawan Honorer"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tinggi Badan : 1 Meter Kotor"
-            android:layout_marginBottom="8dp"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            android:text="Alamat Asal : Kp. Bolorong RT.001, RW001"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:textSize="12sp"
+            android:text="@string/keterangan_usaha"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Nama Perusahaan : Toko Mas Barokah"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Bidang Usaha : Jual Beli Perhiasan"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Status Bangunan/Tanah : Hak Milik"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Tahun Kegiatan : 2017"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="No. SPPT : -"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Lokasi Usaha : Jl. Raya Timur No. 65 Singaparna"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/surat_keterangan"
+            android:textSize="12sp"
+            android:layout_marginTop="16dp"/>
 
     </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxWidth="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:text="OK"
-        android:background="@drawable/my_button2"
-        android:textColor="#FFFFFF"/>
 
 </RelativeLayout>
