@@ -3,35 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     tools:context=".PermohonanSkuActivity">
 
-    <TextView
-        android:id="@+id/tv_nomorSurat"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nomor Surat : 503/ .. / XI/Desa/2020"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_marginTop="16dp"/>
+        android:orientation="vertical"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/tv_namaPerusahaan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="Toko Mas Barokah"/>
+        <TextView
+            android:id="@+id/tv_formulirKartuKeluarga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/formulir"
+            android:textSize="14sp"
+            android:textColor="@android:color/holo_green_dark"/>
 
-    <TextView
-        android:id="@+id/tv_bidangUsaha"
+        <TextView
+            android:id="@+id/tv_tanggal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="28 November 2020"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:text="Jual Beli Perhiasan"
-        android:layout_marginBottom="16dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_idSurat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="ID : 1301188595"
+            android:textSize="12sp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/tv_statusSurat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Terkirim"
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_blue_dark"/>
+
+    </LinearLayout>
 
 </LinearLayout>

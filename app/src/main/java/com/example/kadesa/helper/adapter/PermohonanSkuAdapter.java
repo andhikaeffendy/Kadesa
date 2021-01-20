@@ -28,13 +28,15 @@ public class PermohonanSkuAdapter extends ArrayAdapter<PermohonanSku> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_permohonan_sku, parent,false);
 
         PermohonanSku current = getItem(position);
-        TextView nomorSurat = (TextView) convertView.findViewById(R.id.tv_nomorSurat);
-        TextView namaPerusahaan = (TextView) convertView.findViewById(R.id.tv_namaPerusahaan);
-        TextView bidangUsaha = (TextView) convertView.findViewById(R.id.tv_bidangUsaha);
+        TextView formulirKK = (TextView) convertView.findViewById(R.id.tv_formulirKartuKeluarga);
+        TextView tanggal = (TextView) convertView.findViewById(R.id.tv_tanggal);
+        TextView idSurat = (TextView) convertView.findViewById(R.id.tv_idSurat);
+        TextView status = (TextView) convertView.findViewById(R.id.tv_statusSurat);
 
-        nomorSurat.setText(current.getmNomorSurat());
-        namaPerusahaan.setText(current.getmNamaPerusahaan());
-        bidangUsaha.setText(current.getmBidangUsaha());
+        formulirKK.setText(current.getmFormulirKK());
+        tanggal.setText(current.getmTanggal());
+        idSurat.setText(current.getmIdSurat());
+        status.setText(current.getmStatus());
 
         return convertView;
     }

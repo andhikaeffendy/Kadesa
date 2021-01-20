@@ -2,35 +2,44 @@ package com.example.kadesa.model;
 
 public class PermohonanSku {
 
-    String mNomorSurat, mNamaPerusahaan, mBidangUsaha;
+    String mFormulirKK, mTanggal, mIdSurat, mStatus;
 
-    public PermohonanSku(String mNomorSurat, String mNamaPerusahaan, String mBidangUsaha) {
-        this.mNomorSurat = mNomorSurat;
-        this.mNamaPerusahaan = mNamaPerusahaan;
-        this.mBidangUsaha = mBidangUsaha;
+    public PermohonanSku(String mFormulirKK, String mTanggal, String mIdSurat, String mStatus) {
+        this.mFormulirKK = mFormulirKK;
+        this.mTanggal = mTanggal;
+        this.mIdSurat = mIdSurat;
+        this.mStatus = mStatus;
     }
 
-    public String getmNomorSurat() {
-        return mNomorSurat;
+    public String getmFormulirKK() {
+        return mFormulirKK;
     }
 
-    public void setmNomorSurat(String mNomorSurat) {
-        this.mNomorSurat = mNomorSurat;
+    public void setmFormulirKK(String mFormulirKK) {
+        this.mFormulirKK = mFormulirKK;
     }
 
-    public String getmNamaPerusahaan() {
-        return mNamaPerusahaan;
+    public String getmTanggal() {
+        return mTanggal;
     }
 
-    public void setmNamaPerusahaan(String mNamaPerusahaan) {
-        this.mNamaPerusahaan = mNamaPerusahaan;
+    public void setmTanggal(String mTanggal) {
+        this.mTanggal = mTanggal;
     }
 
-    public String getmBidangUsaha() {
-        return mBidangUsaha;
+    public String getmIdSurat() {
+        return mIdSurat;
     }
 
-    public void setmBidangUsaha(String mBidangUsaha) {
-        this.mBidangUsaha = mBidangUsaha;
+    public void setmIdSurat(String mIdSurat) {
+        this.mIdSurat = mIdSurat;
+    }
+
+    public String getmStatus() {
+        return mStatus;
+    }
+
+    public void setmStatus(String mStatus) {
+        this.mStatus = mStatus;
     }
 }

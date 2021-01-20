@@ -53,23 +53,4 @@ public class FormPermohonanSkuActivity extends AppCompatActivity {
         spinnerJK.setAdapter(adapter);
 
     }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_item, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.list:
-                Intent intent = new Intent(this, PermohonanSkuActivity.class);
-                startActivity(intent);
-                Toast.makeText(this,"Masuk List", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

@@ -31,8 +31,8 @@ public class PermohonanSkuActivity extends AppCompatActivity {
         listView = findViewById(R.id.listview);
 
         permohonanSkuAdapter = new PermohonanSkuAdapter(this, permohonanSkuArrayList);
-        permohonanSkuArrayList.add(new PermohonanSku("Nomor Surat : 503/ .. / XI/Desa/2020", "Wiradipa", "Android"));
-        permohonanSkuArrayList.add(new PermohonanSku("Nomor Surat : 503/ .. / XI/Desa/2020", "Nusantara", "Website"));
+        permohonanSkuArrayList.add(new PermohonanSku("Formulir kartu keluarga (Pengganti F.1-01)", "28 November 2020", "ID : 1301188595", "Terkirim"));
+        permohonanSkuArrayList.add(new PermohonanSku("Formulir kartu keluarga (Pengganti F.1-01)", "28 November 2020", "ID : 1301188595", "Terkirim"));
 
         listView.setAdapter(permohonanSkuAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

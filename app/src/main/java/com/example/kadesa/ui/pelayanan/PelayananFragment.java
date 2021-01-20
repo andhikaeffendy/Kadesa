@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +18,9 @@ import com.example.kadesa.FormPermohonanSkuActivity;
 import com.example.kadesa.HistoryPermohonanKkActivity;
 import com.example.kadesa.HistoryPermohonanSkuActivity;
 import com.example.kadesa.LoginActivity;
+import com.example.kadesa.PermohonanSkuActivity;
 import com.example.kadesa.R;
+import com.example.kadesa.model.PermohonanSku;
 
 public class PelayananFragment extends Fragment {
 
@@ -25,6 +28,7 @@ public class PelayananFragment extends Fragment {
 
     Button btnKtp;
     Button btnSKU;
+    ImageView imgList;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class PelayananFragment extends Fragment {
 
         btnKtp = (Button) root.findViewById(R.id.btn_ktp);
         btnSKU = (Button) root.findViewById(R.id.btn_sku);
+        imgList = (ImageView) root.findViewById(R.id.img_list);
 
         btnKtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,6 +59,14 @@ public class PelayananFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FormPermohonanSkuActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        imgList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), PermohonanSkuActivity.class);
                 startActivity(intent);
             }
         });
