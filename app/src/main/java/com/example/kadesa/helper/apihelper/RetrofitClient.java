@@ -14,6 +14,7 @@ import retrofit2.Retrofit;
 public class RetrofitClient {
 
     private static Retrofit retrofit = null;
+    private static RetrofitClient mIntance;
 
     public static Retrofit getClient(String baseUrl){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();

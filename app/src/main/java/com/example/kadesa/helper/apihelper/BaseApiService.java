@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Header;
 
-public interface BaseApiService {
+public interface  BaseApiService {
 
 
     @GET("articles")
@@ -39,7 +39,11 @@ public interface BaseApiService {
     Call<ResponseBody> getListPekerjaan();
 
     @GET("profile")
-    Call<ResponseBody> getProfileUser();
+    Call<ResponseBody> getProfileUser(@Header("Authorization") String authorization);
+
+    @GET("detail_village")
+    Call<ResponseBody> getDetailDesa(@Query("village_id") int village_id);
+
 
     @GET("articles")
     Call<ResponseBody> getSliderAfterLogin(@Query("featured") int featured,
@@ -75,7 +79,6 @@ public interface BaseApiService {
     @GET("videos/{id}")
     Call<ResponseBody> getDetailVideo(@Path("id") int id,
                                       @Query("auth_token") String authorization);
-
 
     @GET("institutions/{id}")
     Call<ResponseBody> getLembaga(@Path("id") int id,
@@ -122,8 +125,20 @@ public interface BaseApiService {
                                             @Field("activation_code") String activation_code);
 
     @FormUrlEncoded
+    @POST("send_activation_code")
+    Call<ResponseBody> resendActivationCode(@Field("email") String email);
+
+    @FormUrlEncoded
+    @POST("reset_password")
+    Call<ResponseBody> resetPassword(@Field("email") String email);
+
+    @FormUrlEncoded
     @POST("login")
     Call<ResponseBody> loginRequest(@Field("email") String email,
                                     @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("users/sign_out")
+    Call<ResponseBody> logoutRequest(@Field("auth_token") String token);
 
 }

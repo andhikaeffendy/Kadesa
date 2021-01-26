@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,8 @@ import com.example.kadesa.R;
 import com.example.kadesa.helper.AppSession;
 import com.example.kadesa.helper.apihelper.BaseApiService;
 import com.example.kadesa.helper.apihelper.UtilsApi;
+import com.example.kadesa.model.ApiResponse;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +63,6 @@ public class PemerintahFragment extends Fragment {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()){
-                    Log.d("Pemerintah : " ,response.body().toString());
                     try {
                         JSONObject jsonObject = new JSONObject(response.body().string());
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
@@ -85,13 +87,14 @@ public class PemerintahFragment extends Fragment {
                             startActivity(intent);
                         }
                     });
-
                 }
+
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Toast.makeText(getActivity(), "salah", Toast.LENGTH_SHORT).show();
+                return;
             }
         });
 

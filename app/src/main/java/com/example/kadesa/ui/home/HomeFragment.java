@@ -32,10 +32,13 @@ import com.example.kadesa.R;
 import com.example.kadesa.VideoActivity;
 import com.example.kadesa.helper.AppSession;
 import com.example.kadesa.helper.adapter.ArtikelTerbaruAdapter;
+import com.example.kadesa.helper.adapter.IndahDesakuAdapter;
 import com.example.kadesa.helper.apihelper.BaseApiService;
 import com.example.kadesa.helper.apihelper.RetrofitClient;
 import com.example.kadesa.helper.apihelper.UtilsApi;
+import com.example.kadesa.model.ApiResponse;
 import com.example.kadesa.model.ArtikelTerbaru;
+import com.example.kadesa.model.IndahDesaku;
 import com.example.kadesa.model.Slider;
 import com.example.kadesa.model.User;
 import com.google.gson.Gson;
@@ -56,23 +59,27 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView, rvDesa;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private User user;
 
     private List<ArtikelTerbaru> artikelTerbaruList;
+    private List<IndahDesaku> indahDesakuList;
     AppSession appSession;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container,false);
 
+        BaseApiService baseApiService = UtilsApi.getApiService();
+
         final ImageSlider imageSlider = view.findViewById(R.id.slider);
         List<SlideModel> slideModels = new ArrayList<>();
         imageSlider.setImageList(slideModels,true);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.tv_recycleArtikelHome);
+        rvDesa = (RecyclerView) view.findViewById(R.id.tv_recycleIndahDesaku);
 
         layoutManager = new LinearLayoutManager(getActivity());
         appSession = new AppSession(getActivity());
@@ -80,10 +87,10 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         artikelTerbaruList = new ArrayList<>();
 
+        rvDesa.setLayoutManager(layoutManager);
+        indahDesakuList = new ArrayList<>();
 
         //artikelTerbaruList.add(new ArtikelTerbaru(R.drawable.ic_video,"Judul","Deskripsiii"));
-
-
 
         Button btnProfileDesa = (Button) view.findViewById(R.id.btn_profileDesa);
         Button btnAmbulance = (Button) view.findViewById(R.id.btn_ambulance);
@@ -125,8 +132,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        BaseApiService baseApiService = UtilsApi.getApiService();
-
         if (appSession.isLogin()){
             baseApiService.getSliderAfterLogin(1,appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
                 @Override
@@ -165,7 +170,8 @@ public class HomeFragment extends Fragment {
                         List<SlideModel> slideModels = new ArrayList<>();
                         Log.d("Belum Login : ",response.body().toString());
                         try {
-                            JSONObject jsonObject = new JSONObject(response.body().string());
+                            String result = response.body().string();
+                            JSONObject jsonObject = new JSONObject(result);
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
                             for (int i = 0; i<jsonArray.length(); i++){
 //                            Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
@@ -189,8 +195,40 @@ public class HomeFragment extends Fragment {
             });
         }
 
+        //list indah desaku
+//        baseApiService.getListVacation(appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                if (response.isSuccessful()){
+//                    try {
+//                        String result = response.body().string();
+//                        ApiResponse status = new Gson().fromJson(result, ApiResponse.class);
+//
+//                            JSONObject jsonObject = new JSONObject(result);
+//                            JSONArray jsonData = jsonObject.getJSONArray("data");
+//                            for (int i = 0; i<jsonData.length(); i++){
+//                                indahDesakuList.add(new IndahDesaku(jsonData.getJSONObject(i).getInt("id"),
+//                                        jsonData.getJSONObject(i).getString("image"),
+//                                        jsonData.getJSONObject(i).getString("name")));
+//                            }
+//
+//                    } catch (IOException | JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                    mAdapter = new IndahDesakuAdapter(getContext(), indahDesakuList);
+//                    rvDesa.setAdapter(mAdapter);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//            }
+//        });
+
         if (appSession.isLogin()){
-            baseApiService.getArtikelAfterLogin(3,appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
+            baseApiService.getArtikelAfterLogin(4,appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.isSuccessful()){
@@ -201,7 +239,8 @@ public class HomeFragment extends Fragment {
 
                             for (int i = 0; i<jsonArray.length(); i++){
                                 //Log.d("Json Array ke -", "" + jsonArray.getJSONObject(i).getString("image"));
-                                artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("image"),
+                                artikelTerbaruList.add(new ArtikelTerbaru(jsonArray.getJSONObject(i).getInt("id"),
+                                        jsonArray.getJSONObject(i).getString("image"),
                                         jsonArray.getJSONObject(i).getString("name"),null));
                             }
 
@@ -244,7 +283,6 @@ public class HomeFragment extends Fragment {
                         }
 
                         mAdapter = new ArtikelTerbaruAdapter(getActivity(), artikelTerbaruList);
-
                         recyclerView.setAdapter(mAdapter);
 
                     }
@@ -259,4 +297,6 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+
 }

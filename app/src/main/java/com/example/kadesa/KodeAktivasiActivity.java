@@ -8,9 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kadesa.helper.apihelper.BaseApiService;
 import com.example.kadesa.helper.apihelper.UtilsApi;
+import com.example.kadesa.model.ApiResponse;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
@@ -27,6 +31,7 @@ public class KodeAktivasiActivity extends AppCompatActivity {
 
     private EditText mAktifasi;
     private String mEmail;
+    private TextView btnResendCode;
     private final BaseApiService baseApiService = UtilsApi.getApiService();
     private Button mSubmitCode;
 
@@ -37,6 +42,7 @@ public class KodeAktivasiActivity extends AppCompatActivity {
 
         mAktifasi = (EditText) findViewById(R.id.tv_aktifasiKode);
         mSubmitCode = (Button) findViewById(R.id.btn_submitKode);
+        btnResendCode = (TextView) findViewById(R.id.btn_resendCode);
 
         mSubmitCode.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,8 +51,44 @@ public class KodeAktivasiActivity extends AppCompatActivity {
             }
         });
 
+        btnResendCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ResendCode();
+            }
+        });
 
 
+    }
+
+    public void ResendCode(){
+        baseApiService.resendActivationCode(mEmail).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()){
+                    try {
+                        String result = response.body().string();
+                        ApiResponse status = new Gson().fromJson(result, ApiResponse.class);
+
+                        if (status.getStatus().equalsIgnoreCase("success")){
+                            Toast.makeText(getApplication(), "Resend Code dikirim", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Toast.makeText(getApplication(), "Resend Code gagal dikirim", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Toast.makeText(getApplication(), "Resend Code gagal dikirim", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        });
     }
 
     public void AktivationSubmit(){

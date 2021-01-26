@@ -19,7 +19,7 @@ import java.util.List;
 
 public class IndahDesakuAdapter extends ArrayAdapter<IndahDesaku> {
 
-    public IndahDesakuAdapter(@NonNull Context context, @NonNull List objects) {
+    public IndahDesakuAdapter(Context context, List objects) {
         super(context, 0, objects);
     }
 

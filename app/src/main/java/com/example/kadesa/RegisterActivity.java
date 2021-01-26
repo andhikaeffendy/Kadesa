@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kadesa.helper.apihelper.BaseApiService;
 import com.example.kadesa.helper.apihelper.UtilsApi;
@@ -301,6 +302,30 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (selectedProvinsi == null){
+                    autoProvinsi.setError(getString(R.string.error_provinsi));
+                    return;
+                }
+
+                if (selectedKecamatan == null){
+                    autoProvinsi.setError(getString(R.string.error_kecamatan));
+                    return;
+                }
+
+                if (selectedKabupaten == null){
+                    autoProvinsi.setError(getString(R.string.error_kabupaten));
+                    return;
+                }
+
+                if (selectedDesa == null){
+                    autoProvinsi.setError(getString(R.string.error_desa));
+                    return;
+                }
+
+                if (selectedPekerjaan == null){
+                    autoProvinsi.setError(getString(R.string.error_pekerjaan));
+                    return;
+                }
                 SignUpNow();
             }
         });
@@ -342,7 +367,19 @@ public class RegisterActivity extends AppCompatActivity {
                             intent.putExtra(Intent.EXTRA_EMAIL, mEmail);
                             startActivity(intent);
                             finish();
-                        };
+                        }
+                        if (object.getString("status").equals("fail")){
+                            Toast.makeText(getApplication(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        else{
+
+                            View parentLayout = findViewById(android.R.id.content);
+                            Snackbar.make(parentLayout, response.message(), Snackbar.LENGTH_LONG);
+                            return;
+                        }
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {

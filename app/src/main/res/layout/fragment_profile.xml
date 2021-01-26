@@ -18,6 +18,7 @@
             android:orientation="vertical">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imvProfilePict"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:maxHeight="100dp"
@@ -68,23 +69,6 @@
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:layout_marginTop="8dp"
-                android:text="Password" />
-
-            <TextView
-                android:id="@+id/passwordProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#000000"
-                android:text="Desa Purbolonggi"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
                 android:text="Jenis Kelamin" />
 
             <TextView
@@ -111,57 +95,6 @@
                 android:textSize="14sp"
                 android:textColor="#000000"
                 android:text="Kota Batu Bata"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
-                android:text="Provinsi" />
-
-            <TextView
-                android:id="@+id/provinsiProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#000000"
-                android:text="Kabupaten Kurmalasari"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
-                android:text="Kota/Kabupaten" />
-
-            <TextView
-                android:id="@+id/kabupatenProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#000000"
-                android:text="Kota Nahar Mati Lampu"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:textStyle="bold"
-                android:layout_marginTop="8dp"
-                android:text="Kecamatan" />
-
-            <TextView
-                android:id="@+id/kecamatanProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="#000000"
-                android:text="Kecamatan Nahar Mati Lampu"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -214,6 +147,18 @@
                 android:textColor="#000000"
                 android:paddingBottom="16dp"
                 android:text="Wiraswasta"/>
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Logout"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/my_button"
+                android:paddingLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:paddingRight="16dp"/>
 
         </LinearLayout>
     </ScrollView>

@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.example.kadesa.helper.AppSession;
 import com.example.kadesa.helper.apihelper.BaseApiService;
 import com.example.kadesa.helper.apihelper.UtilsApi;
+import com.example.kadesa.model.ApiResponse;
 import com.example.kadesa.model.User;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -60,12 +62,20 @@ public class DetailArtikelActivity extends AppCompatActivity {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()){
                     try {
-                        JSONObject jsonObject = new JSONObject(response.body().string());
-                        JSONObject objectData = new JSONObject(jsonObject.getString("data"));
-                        Log.d("Succes" , jsonObject.getJSONObject("data").getString("name"));
-                        judulArtikel.setText(objectData.getString("name"));
-                        descArtikel.setText(objectData.getString("description"));
-                        picasso.load(objectData.getString("image")).into(imgArtikel);
+                        String result = response.body().string();
+                        ApiResponse status = new Gson().fromJson(result, ApiResponse.class);
+                        if (status.getStatus().equalsIgnoreCase("success")){
+                            JSONObject jsonObject = new JSONObject(result);
+                            JSONObject objectData = new JSONObject(jsonObject.getString("data"));
+                            //Log.d("Succes" , jsonObject.getJSONObject("data").getString("name"));
+                            judulArtikel.setText(objectData.getString("name"));
+                            descArtikel.setText(objectData.getString("description"));
+                            picasso.load(objectData.getString("image")).into(imgArtikel);
+                        }else {
+                            Toast.makeText(getApplicationContext(), "salah", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -76,7 +86,8 @@ public class DetailArtikelActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), "salah", Toast.LENGTH_SHORT).show();
+                return;
             }
         });
 
