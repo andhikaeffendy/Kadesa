@@ -30,13 +30,13 @@ public class PermohonanSkuAdapter extends ArrayAdapter<PermohonanSku> {
         PermohonanSku current = getItem(position);
         TextView formulirKK = (TextView) convertView.findViewById(R.id.tv_formulirKartuKeluarga);
         TextView tanggal = (TextView) convertView.findViewById(R.id.tv_tanggal);
-        TextView idSurat = (TextView) convertView.findViewById(R.id.tv_idSurat);
         TextView status = (TextView) convertView.findViewById(R.id.tv_statusSurat);
+        TextView idSurat = (TextView) convertView.findViewById(R.id.tv_idSurat);
 
         formulirKK.setText(current.getmFormulirKK());
         tanggal.setText(current.getmTanggal());
-        idSurat.setText(current.getmIdSurat());
         status.setText(current.getmStatus());
+        idSurat.setText(""+current.getmIdSurat());
 
         return convertView;
     }

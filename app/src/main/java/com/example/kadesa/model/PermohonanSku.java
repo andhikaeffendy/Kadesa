@@ -2,13 +2,14 @@ package com.example.kadesa.model;
 
 public class PermohonanSku {
 
-    String mFormulirKK, mTanggal, mIdSurat, mStatus;
+    String mFormulirKK, mTanggal, mStatus;
+    int mIdSurat;
 
-    public PermohonanSku(String mFormulirKK, String mTanggal, String mIdSurat, String mStatus) {
+    public PermohonanSku(String mFormulirKK, String mTanggal, String mStatus, int mIdSurat) {
         this.mFormulirKK = mFormulirKK;
         this.mTanggal = mTanggal;
-        this.mIdSurat = mIdSurat;
         this.mStatus = mStatus;
+        this.mIdSurat = mIdSurat;
     }
 
     public String getmFormulirKK() {
@@ -27,19 +28,19 @@ public class PermohonanSku {
         this.mTanggal = mTanggal;
     }
 
-    public String getmIdSurat() {
-        return mIdSurat;
-    }
-
-    public void setmIdSurat(String mIdSurat) {
-        this.mIdSurat = mIdSurat;
-    }
-
     public String getmStatus() {
         return mStatus;
     }
 
     public void setmStatus(String mStatus) {
         this.mStatus = mStatus;
+    }
+
+    public int getmIdSurat() {
+        return mIdSurat;
+    }
+
+    public void setmIdSurat(int mIdSurat) {
+        this.mIdSurat = mIdSurat;
     }
 }

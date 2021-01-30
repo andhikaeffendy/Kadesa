@@ -20,11 +20,21 @@ public interface  BaseApiService {
     @GET("articles")
     Call<ResponseBody> getArtikelBeforeLogin(@Query("limit") int limit);
 
+    @GET("application_letters")
+    Call<ResponseBody> getListLetter(@Header("Authorization") String authorization);
+
+    @GET("application_letters/{id}")
+    Call<ResponseBody> getDetailLetter(@Header("Authorization") String authorization,
+                                       @Path("id") int id);
+
     @GET("articles")
     Call<ResponseBody> getListArtikel();
 
     @GET("states")
     Call<ResponseBody> getListProvinsi();
+
+    @GET("all_districts")
+    Call<ResponseBody> getAllDistrict();
 
     @GET("districts")
     Call<ResponseBody> getListKabupaten(@Query("state_id") int state_id);
@@ -141,4 +151,22 @@ public interface  BaseApiService {
     @POST("users/sign_out")
     Call<ResponseBody> logoutRequest(@Field("auth_token") String token);
 
+    @FormUrlEncoded
+    @POST("application_letters")
+    Call<ResponseBody> submitLetter(@Header("Authorization") String authorization,
+                                    @Field("application_letter_type_id") int applicationLetterType,
+                                    //@Field("user_id") int user_id,
+                                    //@Field("district_id") int district_id,
+                                    @Field("name") String name,
+                                    @Field("birth_district_id") int birth_district_id,
+                                    @Field("gender") String gender,
+                                    @Field("birth_date") String date,
+                                    @Field("marriage_status") int marriage_status,
+                                    @Field("address") String address,
+                                    @Field("company_name") String company_name,
+                                    @Field("business_type") String business_type,
+                                    @Field("building_status") int building_status,
+                                    @Field("starting_year") int starting_year,
+                                    @Field("sppt_number") String sppt_number,
+                                    @Field("company_address") String company_address);
 }

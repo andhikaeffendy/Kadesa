@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tv_titleSurat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Surat Keterangan Usaha"
@@ -22,6 +23,7 @@
             android:textAlignment="center"/>
 
         <TextView
+            android:id="@+id/tv_nomorSurat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/nomor_surat"
@@ -44,11 +46,18 @@
             android:text="Nama : NIZAM RULISTA Al-Ghifari"/>
 
         <TextView
-            android:id="@+id/tv_ttlSku"
+            android:id="@+id/tv_tempatSku"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:text="Tempat, Tanggal lahir : Bandung, 06-03-1992"/>
+            android:text="Tempat : Bandung, 06-03-1992"/>
+
+        <TextView
+            android:id="@+id/tv_tanggalLahirSku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Tempat : Bandung, 06-03-1992"/>
 
         <TextView
             android:id="@+id/tv_jKSku"
@@ -64,14 +73,15 @@
             android:textSize="12sp"
             android:text="Status Perkawinan : Belum Kawin"/>
 
-        <TextView
-            android:id="@+id/tv_pekerjaanSku"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="Pekerjaan : Karyawan Honorer"/>
+<!--        <TextView-->
+<!--            android:id="@+id/tv_pekerjaanSku"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="12sp"-->
+<!--            android:text="Pekerjaan : Karyawan Honorer"/>-->
 
         <TextView
+            android:id="@+id/tv_alamatAsalSku"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
@@ -86,36 +96,42 @@
             android:text="@string/keterangan_usaha"/>
 
         <TextView
+            android:id="@+id/tv_namaPerusahaan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:text="Nama Perusahaan : Toko Mas Barokah"/>
 
         <TextView
+            android:id="@+id/tv_bidangUsaha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:text="Bidang Usaha : Jual Beli Perhiasan"/>
 
         <TextView
+            android:id="@+id/tv_statusBangunan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:text="Status Bangunan/Tanah : Hak Milik"/>
 
         <TextView
+            android:id="@+id/tv_tahunKegiatan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:text="Tahun Kegiatan : 2017"/>
 
         <TextView
+            android:id="@+id/tv_noSppt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:text="No. SPPT : -"/>
 
         <TextView
+            android:id="@+id/tv_lokasiUsaha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12sp"

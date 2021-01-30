@@ -4,19 +4,38 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
+    @SerializedName("id")
+    private int userId;
     private String name;
     private String email;
     @SerializedName("id_token")
     private String token;
     @SerializedName("village_id")
     private int villageId;
-    private String address;
-    private String gender;
     @SerializedName("phone_number")
     private String phoneNumber;
-    private String image;
+    private String gender;
+    private String address;
     @SerializedName("occupation_id")
     private String occupationId;
+    private String image;
+    private int district_id;
+
+    public int getDistrict_id() {
+        return district_id;
+    }
+
+    public void setDistrict_id(int district_id) {
+        this.district_id = district_id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public String getName() {
         return name;

@@ -60,9 +60,10 @@ public class ProfileFragment extends Fragment {
         ProfileViewModel profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
         View root = null;
 
-        if (appSession.isLogin()) {
+        if (appSession.isLogin() && appSession.getData(AppSession.TOKEN) != null ) {
             root = inflater.inflate(R.layout.fragment_profile, container, false);
         } else {
+            appSession.logout();
             root = inflater.inflate(R.layout.activity_must_login, container, false);
         }
 
@@ -112,6 +113,7 @@ public class ProfileFragment extends Fragment {
                                 //picasso.load(jsonObject.getString("image")).into(imvProfilePict);
 
                             }else {
+                                //appSession.logout();
                                 Toast.makeText(getActivity(), "salah", Toast.LENGTH_SHORT).show();
                                 return;
                             }

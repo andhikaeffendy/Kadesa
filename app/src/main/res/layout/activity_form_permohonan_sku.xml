@@ -35,22 +35,26 @@
                 android:textAlignment="center"/>
 
             <EditText
+                android:id="@+id/et_namaLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukkan Nama Anda"
                 android:textSize="14sp"/>
 
-            <EditText
+            <AutoCompleteTextView
+                android:id="@+id/ac_asalLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukkan Tempat Asal Anda"
                 android:textSize="14sp"/>
 
             <EditText
-                android:id="@+id/etTanggalLahir"
+                android:id="@+id/et_tanggalLahirLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Tanggal Lahir Anda"
+                android:clickable="true"
+                android:editable="false"
                 android:textSize="14sp"/>
 
             <Spinner
@@ -60,56 +64,71 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"/>
 
+            <Spinner
+                android:id="@+id/spinnerStatusPerkawinan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"/>
+
             <EditText
+                android:id="@+id/et_pekerjaanLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Masukkan Pekerjaan Anda"
                 android:textSize="14sp"/>
 
             <EditText
+                android:id="@+id/et_alamatAsalLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Alamat Asal"
                 android:textSize="14sp"/>
 
             <EditText
+                android:id="@+id/et_perusahaanLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nama Perusahaan"
                 android:textSize="14sp"/>
 
             <EditText
+                android:id="@+id/et_usahaLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Bidang Usaha"
                 android:textSize="14sp"/>
 
-            <EditText
+            <Spinner
+                android:id="@+id/spinner_buildingStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Status Bangunan/Tanah"
-                android:textSize="14sp"/>
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="4dp"/>
 
             <EditText
+                android:id="@+id/et_tahunKegiatanLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Tahun Kegiatan"
                 android:textSize="14sp"/>
 
             <EditText
+                android:id="@+id/et_spptLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="No. SPPT"
                 android:textSize="14sp"/>
 
             <EditText
+                android:id="@+id/et_lokasiUsahaLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Lokasi Usaha"
                 android:textSize="14sp"/>
 
             <Button
-                android:id="@+id/btn_register"
+                android:id="@+id/btn_submitLetter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxWidth="200dp"

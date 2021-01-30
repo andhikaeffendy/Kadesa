@@ -87,8 +87,8 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         artikelTerbaruList = new ArrayList<>();
 
-        rvDesa.setLayoutManager(layoutManager);
-        indahDesakuList = new ArrayList<>();
+//        rvDesa.setLayoutManager(layoutManager);
+//        indahDesakuList = new ArrayList<>();
 
         //artikelTerbaruList.add(new ArtikelTerbaru(R.drawable.ic_video,"Judul","Deskripsiii"));
 

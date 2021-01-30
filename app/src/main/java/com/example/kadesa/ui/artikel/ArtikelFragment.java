@@ -73,7 +73,8 @@ public class ArtikelFragment extends Fragment {
                             JSONArray jsonArray = jsonObject.getJSONArray("data");
                             for (int i = 0; i < jsonArray.length(); i++){
                                 artikels.add(new Artikel(jsonArray.getJSONObject(i).getString("image"),
-                                        jsonArray.getJSONObject(i).getString("name"),jsonArray.getJSONObject(i).getInt("id")));
+                                        jsonArray.getJSONObject(i).getString("name"),
+                                        jsonArray.getJSONObject(i).getInt("id")));
                             }
 
                         } catch (JSONException e) {
