@@ -1,11 +1,18 @@
 package com.example.kadesa;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kadesa.helper.AppSession;
 import com.example.kadesa.helper.apihelper.BaseApiService;
@@ -29,7 +36,7 @@ public class DetailSkuActivity extends AppCompatActivity {
     private AppSession appSession;
     private User user;
     private BaseApiService baseApiService = UtilsApi.getApiService();
-    private int id;
+    private int idSurat;
     private TextView tvName, tvTempat, tvTanggalLahir, tvJk, tvStatusPerkawinan, tvPekerjaan, tvAlamatAsal,
             tvNamaPerusahaan, tvBidangUsaha, tvStatusBangunan, tvTahunKegiatan, tvNoSppt, tvLokasiUsaha, tvTitleSurat, tvNomorSurat;
 
@@ -38,7 +45,7 @@ public class DetailSkuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_sku);
 
-        getSupportActionBar().setTitle("Detail Permohonan SKU");
+        getSupportActionBar().setTitle("Detail Permohonan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -58,12 +65,12 @@ public class DetailSkuActivity extends AppCompatActivity {
         tvNoSppt = findViewById(R.id.tv_noSppt);
         tvLokasiUsaha = findViewById(R.id.tv_lokasiUsaha);
 
-        appSession = new AppSession(this);
-        id = getIntent().getIntExtra(Intent.EXTRA_EMAIL,0);
+        appSession = new AppSession(getApplicationContext());
+        idSurat = getIntent().getIntExtra(Intent.EXTRA_EMAIL,0);
 
-        Log.d("id : ", ""+id);
+        Log.d("id : ", ""+idSurat);
 
-        baseApiService.getDetailLetter(appSession.getData(AppSession.TOKEN), id).enqueue(new Callback<ResponseBody>() {
+        baseApiService.getDetailLetter(appSession.getData(AppSession.TOKEN), idSurat).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()){
@@ -75,14 +82,14 @@ public class DetailSkuActivity extends AppCompatActivity {
                             Log.d("detail: ", jsonObject.toString());
                             tvTitleSurat.setText(jsonObject.getString("application_letter_type"));
                             tvNomorSurat.setText("Nomor Surat : " + jsonObject.getString("id"));
-                            tvName.setText("Nama : "+jsonObject.getString("name"));
+                            tvName.setText("Nama : "+jsonObject.getString("name").toUpperCase());
                             tvTempat.setText("Tempat lahir: "+ jsonObject.getString("birth_district"));
                             tvTanggalLahir.setText("Tanggal lahir: "+ jsonObject.getString("birth_date"));
 
                             if (jsonObject.getString("gender").equalsIgnoreCase("L")){
-                                tvJk.setText("Laki-laki");
+                                tvJk.setText("Jenis kelamin : Laki-laki");
                             }else if (jsonObject.getString("gender").equalsIgnoreCase("P")){
-                                tvJk.setText("Perempuan");
+                                tvJk.setText("Jenis kelamin : Perempuan");
                             }
 
                             tvStatusPerkawinan.setText("Status Perkawinan : "+jsonObject.getString("marriage_status"));
@@ -105,5 +112,77 @@ public class DetailSkuActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_detail, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_delete:
+                showDialog();
+                //Toast.makeText(getApplicationContext(), "Delete",Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.menu_edit:
+                Toast.makeText(getApplicationContext(), "Edit", Toast.LENGTH_SHORT).show();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showDialog(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                DetailSkuActivity.this);
+
+        // set title dialog
+        alertDialogBuilder.setTitle("Delete");
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage("Anda yakin ingin Menghapus data ini?")
+                .setIcon(R.drawable.ic_baseline_delete_24)
+                .setCancelable(false)
+                .setPositiveButton("Ya",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        baseApiService.deleteLetter(idSurat,appSession.getData(AppSession.TOKEN)).enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()){
+                                    Toast.makeText(getApplicationContext(), "Terhapus", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(DetailSkuActivity.this, PermohonanSkuActivity.class);
+                                    startActivity(intent);
+                                }else {
+                                    Toast.makeText(DetailSkuActivity.this,"Tidak terhapus", Toast.LENGTH_SHORT);
+                                    return;
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Toast.makeText(DetailSkuActivity.this,"Tidak terhapus", Toast.LENGTH_SHORT);
+                                return;
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("Tidak",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // jika tombol ini diklik, akan menutup dialog
+                        // dan tidak terjadi apa2
+                        dialog.cancel();
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
     }
 }

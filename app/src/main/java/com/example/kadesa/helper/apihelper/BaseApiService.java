@@ -2,6 +2,7 @@ package com.example.kadesa.helper.apihelper;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -97,7 +98,9 @@ public interface  BaseApiService {
     @GET("institution_members/{id}")
     Call<ResponseBody> getDetailMemberLembaga(@Path("id") int id,
                                               @Header("Authorization") String authorization);
-
+    @DELETE("application_letters/{id}")
+    Call<ResponseBody> deleteLetter (@Path("id") int id,
+                                     @Header("Authorization") String authorization);
 
 
 //    @FormUrlEncoded
