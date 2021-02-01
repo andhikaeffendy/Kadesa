@@ -49,7 +49,7 @@ public class PemerintahFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pemerintah, container, false);
+        final View view = inflater.inflate(R.layout.fragment_pemerintah, container, false);
 
         appSession = new AppSession(getActivity());
 
@@ -66,13 +66,13 @@ public class PemerintahFragment extends Fragment {
                     try {
                         String result = response.body().string();
                         ApiResponse status = new Gson().fromJson(result, ApiResponse.class);
-
-                        JSONObject jsonObject = new JSONObject(result);
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
-                        for (int i = 0; i<jsonArray.length(); i++){
-                            pemerintahs.add(new Pemerintah(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("name")));
+                        if (status.getStatus().equalsIgnoreCase("success")){
+                            JSONObject jsonObject = new JSONObject(result);
+                            JSONArray jsonArray = jsonObject.getJSONArray("data");
+                            for (int i = 0; i<jsonArray.length(); i++){
+                                pemerintahs.add(new Pemerintah(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("name")));
+                            }
                         }
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     } catch (IOException e) {

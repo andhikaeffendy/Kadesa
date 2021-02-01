@@ -152,9 +152,8 @@ public interface  BaseApiService {
     Call<ResponseBody> loginRequest(@Field("email") String email,
                                     @Field("password") String password);
 
-    @FormUrlEncoded
-    @POST("users/sign_out")
-    Call<ResponseBody> logoutRequest(@Field("auth_token") String token);
+    @POST("logout")
+    Call<ResponseBody> logoutRequest(@Header("Authorization") String authorization);
 
     @FormUrlEncoded
     @POST("application_letters")
