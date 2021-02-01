@@ -6,8 +6,10 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.HEAD;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Header;
@@ -158,8 +160,6 @@ public interface  BaseApiService {
     @POST("application_letters")
     Call<ResponseBody> submitLetter(@Header("Authorization") String authorization,
                                     @Field("application_letter_type_id") int applicationLetterType,
-                                    //@Field("user_id") int user_id,
-                                    //@Field("district_id") int district_id,
                                     @Field("name") String name,
                                     @Field("birth_district_id") int birth_district_id,
                                     @Field("gender") String gender,
@@ -172,4 +172,23 @@ public interface  BaseApiService {
                                     @Field("starting_year") int starting_year,
                                     @Field("sppt_number") String sppt_number,
                                     @Field("company_address") String company_address);
+
+    @FormUrlEncoded
+    @PUT("application_letters/{id}")
+    Call<ResponseBody> editLetter(@Header("Authorization") String authorization,
+                                  @Path("id") int id,
+                                  @Field("application_letter_type_id") int applicationLetterType,
+                                  @Field("name") String name,
+                                  @Field("birth_district_id") int birth_district_id,
+                                  @Field("gender") String gender,
+                                  @Field("birth_date") String date,
+                                  @Field("marriage_status") int marriage_status,
+                                  @Field("address") String address,
+                                  @Field("company_name") String company_name,
+                                  @Field("business_type") String business_type,
+                                  @Field("building_status") int building_status,
+                                  @Field("starting_year") int starting_year,
+                                  @Field("sppt_number") String sppt_number,
+                                  @Field("company_address") String company_address);
+
 }

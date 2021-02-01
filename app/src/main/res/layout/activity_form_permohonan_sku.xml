@@ -27,6 +27,7 @@
                 android:layout_marginBottom="8dp"/>
 
             <TextView
+                android:id="@+id/tv_nomorSuratEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nomor Surat : 503/ .. / XI/Desa/2020"
@@ -70,13 +71,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"/>
-
-            <EditText
-                android:id="@+id/et_pekerjaanLetter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Masukkan Pekerjaan Anda"
-                android:textSize="14sp"/>
 
             <EditText
                 android:id="@+id/et_alamatAsalLetter"

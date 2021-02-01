@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,8 +51,8 @@ public class PelayananFragment extends Fragment {
         btnKtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), HistoryPermohonanSkuActivity.class);
-                startActivity(intent);
+                Toast.makeText(getActivity(),"Coming Soon", Toast.LENGTH_SHORT).show();
+
             }
         });
 

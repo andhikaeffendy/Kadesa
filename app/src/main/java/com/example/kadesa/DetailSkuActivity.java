@@ -36,7 +36,7 @@ public class DetailSkuActivity extends AppCompatActivity {
     private AppSession appSession;
     private User user;
     private BaseApiService baseApiService = UtilsApi.getApiService();
-    private int idSurat;
+    private int idSurat, idBirth;
     private TextView tvName, tvTempat, tvTanggalLahir, tvJk, tvStatusPerkawinan, tvPekerjaan, tvAlamatAsal,
             tvNamaPerusahaan, tvBidangUsaha, tvStatusBangunan, tvTahunKegiatan, tvNoSppt, tvLokasiUsaha, tvTitleSurat, tvNomorSurat;
 
@@ -44,6 +44,12 @@ public class DetailSkuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_sku);
+
+        appSession = new AppSession(getApplicationContext());
+        idSurat = getIntent().getIntExtra("idSurat", 0);
+        idBirth = getIntent().getIntExtra("idBirth", 0);
+        Log.d("idSurat Detail" , ""+idSurat);
+        Log.d("idBirth Detail" , ""+idBirth);
 
         getSupportActionBar().setTitle("Detail Permohonan");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,10 +71,8 @@ public class DetailSkuActivity extends AppCompatActivity {
         tvNoSppt = findViewById(R.id.tv_noSppt);
         tvLokasiUsaha = findViewById(R.id.tv_lokasiUsaha);
 
-        appSession = new AppSession(getApplicationContext());
-        idSurat = getIntent().getIntExtra(Intent.EXTRA_EMAIL,0);
 
-        Log.d("id : ", ""+idSurat);
+
 
         baseApiService.getDetailLetter(appSession.getData(AppSession.TOKEN), idSurat).enqueue(new Callback<ResponseBody>() {
             @Override
@@ -84,6 +88,7 @@ public class DetailSkuActivity extends AppCompatActivity {
                             tvNomorSurat.setText("Nomor Surat : " + jsonObject.getString("id"));
                             tvName.setText("Nama : "+jsonObject.getString("name").toUpperCase());
                             tvTempat.setText("Tempat lahir: "+ jsonObject.getString("birth_district"));
+                            //idBirth = Integer.parseInt(jsonObject.getString("birth_district_id"));
                             tvTanggalLahir.setText("Tanggal lahir: "+ jsonObject.getString("birth_date"));
 
                             if (jsonObject.getString("gender").equalsIgnoreCase("L")){
@@ -91,7 +96,6 @@ public class DetailSkuActivity extends AppCompatActivity {
                             }else if (jsonObject.getString("gender").equalsIgnoreCase("P")){
                                 tvJk.setText("Jenis kelamin : Perempuan");
                             }
-
                             tvStatusPerkawinan.setText("Status Perkawinan : "+jsonObject.getString("marriage_status"));
                             tvAlamatAsal.setText("Alamat Asal : " + jsonObject.getString("address"));
                             tvNamaPerusahaan.setText("Nama Perusahaan : " + jsonObject.getString("company_name"));
@@ -130,6 +134,12 @@ public class DetailSkuActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_edit:
                 Toast.makeText(getApplicationContext(), "Edit", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), FormPermohonanSkuActivity.class);
+                intent.putExtra("idSurat", idSurat);
+                //idBirth = getIntent().getIntExtra("idBirth", 0);
+                intent.putExtra("idBirth", idBirth);
+                intent.putExtra("edit_mode", true);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -153,9 +163,21 @@ public class DetailSkuActivity extends AppCompatActivity {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 if (response.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(), "Terhapus", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(DetailSkuActivity.this, PermohonanSkuActivity.class);
-                                    startActivity(intent);
+                                    try {
+                                        String result = response.body().string();
+                                        ApiResponse status = new Gson().fromJson(result, ApiResponse.class);
+                                        if (status.getStatus().equalsIgnoreCase("success")){
+                                            Toast.makeText(getApplicationContext(), "Terhapus", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(DetailSkuActivity.this, PermohonanSkuActivity.class);
+                                            startActivity(intent);
+                                        }else {
+                                            Toast.makeText(DetailSkuActivity.this,"Tidak terhapus", Toast.LENGTH_SHORT);
+                                            return;
+                                        }
+
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }else {
                                     Toast.makeText(DetailSkuActivity.this,"Tidak terhapus", Toast.LENGTH_SHORT);
                                     return;

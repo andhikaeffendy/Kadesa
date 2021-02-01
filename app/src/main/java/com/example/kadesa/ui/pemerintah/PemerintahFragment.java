@@ -64,9 +64,11 @@ public class PemerintahFragment extends Fragment {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()){
                     try {
-                        JSONObject jsonObject = new JSONObject(response.body().string());
-                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        String result = response.body().string();
+                        ApiResponse status = new Gson().fromJson(result, ApiResponse.class);
 
+                        JSONObject jsonObject = new JSONObject(result);
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
                         for (int i = 0; i<jsonArray.length(); i++){
                             pemerintahs.add(new Pemerintah(jsonArray.getJSONObject(i).getInt("id"), jsonArray.getJSONObject(i).getString("name")));
                         }

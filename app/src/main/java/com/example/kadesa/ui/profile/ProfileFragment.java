@@ -62,8 +62,10 @@ public class ProfileFragment extends Fragment {
 
         if (appSession.isLogin() && appSession.getData(AppSession.TOKEN) != null ) {
             root = inflater.inflate(R.layout.fragment_profile, container, false);
-        } else {
+        } else if (appSession.getData(AppSession.TOKEN) == null){
             appSession.logout();
+            root = inflater.inflate(R.layout.activity_must_login, container, false);
+        }else {
             root = inflater.inflate(R.layout.activity_must_login, container, false);
         }
 

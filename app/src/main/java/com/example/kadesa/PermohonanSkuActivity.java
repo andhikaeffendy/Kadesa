@@ -47,6 +47,12 @@ public class PermohonanSkuActivity extends AppCompatActivity {
         appSession = new AppSession(this);
         BaseApiService baseApiService = UtilsApi.getApiService();
 
+        if (appSession.getData(AppSession.TOKEN) == null){
+            Toast.makeText(getApplicationContext(),"Anda Harus Login dahulu", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
         getSupportActionBar().setTitle("List Permohonan SKU");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -81,7 +87,7 @@ public class PermohonanSkuActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                             adapter.getItemAtPosition(position);
                             Intent intent = new Intent(getApplicationContext(), DetailSkuActivity.class);
-                            intent.putExtra(Intent.EXTRA_EMAIL, permohonanSkuArrayList.get(position).getmIdSurat());
+                            intent.putExtra("idSurat", permohonanSkuArrayList.get(position).getmIdSurat());
                             //Log.d("id : ", permohonanSkuArrayList.get(position).getmIdSurat());
                             startActivity(intent);
                         }
